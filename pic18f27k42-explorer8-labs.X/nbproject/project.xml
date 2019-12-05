@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>PIC18F27K42_Exp8v345</name>
+            <name>pic18f27k42-explorer8-labs</name>
             <creation-uuid>cf5b6007-78fe-4e46-ab52-b46af1e5a613</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
