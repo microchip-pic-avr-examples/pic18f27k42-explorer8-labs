@@ -9,15 +9,27 @@ pipeline {
 
     parameters {
         string( name: 'NOTIFICATION_EMAIL',
-                defaultValue: 'gaurang.gunde@microchip.com, prasad.aradhya@microchip.com',
+                defaultValue:  'Marc.McComb@microchip.com, \
+                                Mamun.Ahmed@microchip.com, \
+                                stephen.cowden@microchip.com, \
+                                michael.pearce@microchip.com, \
+                                Vinaya.Skanda@Microchip.com, \
+                                Johan.Lofstad@microchip.com, \
+                                Espen.Krangnes@microchip.com, \
+                                Catalina.Costin@microchip.com, \
+                                Namrata.Dalvi@microchip.com, \
+                                Martin.Thomaz@microchip.com, \
+                                Marius.Nicolae@microchip.com, \
+                                shaima.husain@microchip.com, \
+                                prasad.aradhya@microchip.com',
                 description: "Email to send build failure and fixed notifications.")
     }
 	
 	environment {		
-		GITHUB_URL ='https://github.com/gauranggunde/pic18f27k42-explorer8-labs.git'
+		GITHUB_URL ='https://github.com/microchip-pic-avr-examples/pic18f27k42-explorer8-labs.git'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/ebe/pic18f27k42-explorer8-labs.git'
-		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/~i15232/example-github-deployment-strategy-1.git'
-		DEPLOY_SCRIPT_DIR = 'example-github-deployment-strategy-1'
+		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
+		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
 		DEPLOY_SCRIPT_FILE = 'deploy-source-as-is.sh'
 	}
 
@@ -42,23 +54,28 @@ pipeline {
             }
         }	
 		
-	}
-    post {
-		success{
-			archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", fingerprint: true
-
-            script {
-                if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {
-                    mail to: "${env.CHANGE_AUTHOR_EMAIL}, ${params.NOTIFICATION_EMAIL}",
-                        subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                        body: "Something is right with ${env.BUILD_URL}"
-                } else {
-                    mail to: "${params.NOTIFICATION_EMAIL}",
-                        subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                        body: "Something is right with ${env.BUILD_URL}"
-                }
+        stage('Deploy') {
+			when {
+				not { 
+					changeRequest() 
+				}
+				anyOf {
+					tag ''
+				}
             }
-        }        
+			steps {
+				script {
+					execute("git clone ${env.DEPLOY_TOOL_URL}")		
+					
+					withCredentials([usernamePassword(credentialsId: '8bit-examples.github.com', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
+						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_PASS}")	
+					}						
+				}
+			}
+        }
+	}
+
+    post {
         failure {
 			archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", fingerprint: true
 			
