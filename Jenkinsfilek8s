@@ -76,9 +76,7 @@ pipeline {
 	}
 
     post {
-        failure {
-			archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
-			
+        failure {			
             script {			
 				if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {		  
 					mail to: "${env.CHANGE_AUTHOR_EMAIL}, ${params.NOTIFICATION_EMAIL}",
@@ -90,6 +88,9 @@ pipeline {
                     body: "Pipeline failure. ${env.BUILD_URL}"
 				}
             }
+        }
+        always {
+            archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
         }
     }
 }
