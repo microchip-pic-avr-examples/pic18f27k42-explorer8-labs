@@ -77,7 +77,7 @@ pipeline {
 
     post {
         failure {
-			archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", fingerprint: true
+			archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
 			
             script {			
 				if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {		  
