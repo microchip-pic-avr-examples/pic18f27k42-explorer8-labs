@@ -2,29 +2,29 @@
     "metaDataVersion": "1.0.0",
     "category": "com.microchip.ide.project",
     "content": {
-        "metaDataVersion": "1.1.0",
+        "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.",
-        "version": " ",
-        "displayName": "  ",
-        "projectName": "",
-        "shortDescription": "",
+        "version": "2.0.0",
+        "displayName": "PIC18F27K42 Explorer-8 Labs",
+        "projectName": "pic18f27k42-explorer8-labs",
+        "shortDescription": "MPLAB Xpress Example for Explorer-8 development board with PIC18F27K42",
         "ide": {
-            "name": "",
-            "semverRange": ""
+            "name": "MPLAB X",
+            "semverRange": ">=5.15.00"
         },
         "compiler": [
 			{
-				"name": "",
-				"semverRange": ""
+				"name": "XC8",
+				"semverRange": "^2.0.0"
 			}
 		],
         "dfp": {
-            "name": "",
-            "semverRange": ""
+            "name": "PIC18F-K_DFP",
+            "semverRange": "^1.0.48"
         },
         "configurator": {
-            "name": "",
-            "semverRange": ""
+            "name": "MCC",
+            "semverRange": ">=3.75.00"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -32,27 +32,13 @@
             "content": {
                 "metaDataVersion": "1.0.0",
                 "category": "com.microchip.device",
-                "name": "",
+                "name": "PIC18F27K42",
                 "versionRange": "*"
             }
         },
-        "author": "",
-        "subcategories": [
-            "",
-            [
-               "Peripherals", ""
-            ],
-            [
-               "Peripherals", ""
-            ]            			
-        ],
-        "peripherals": [
-            "",""
-        ],
-        "keywords": [
-            "",
-            ""			
-        ],
+        "author": "Microchip",
+        "peripherals": ["TMR","SPI","ADCC","GPIO","PWM","EEPROM"],
+        "keywords": ["LCD","Explorer"],
 		"additionalData": {
 			"longDescription": {
 				"metaDataVersion": "1.0.0",
