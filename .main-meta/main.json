@@ -10,7 +10,7 @@
         "shortDescription": "MPLAB Xpress Example for Explorer-8 development board with PIC18F27K42",
         "ide": {
             "name": "MPLAB X",
-            "semverRange": ">=5.15.00"
+            "semverRange": ">=5.15.0"
         },
         "compiler": [
 			{
@@ -24,7 +24,7 @@
         },
         "configurator": {
             "name": "MCC",
-            "semverRange": ">=3.75.00"
+            "semverRange": ">=3.75.0"
         },
         "device": {
             "metaDataVersion": "1.0.0",
